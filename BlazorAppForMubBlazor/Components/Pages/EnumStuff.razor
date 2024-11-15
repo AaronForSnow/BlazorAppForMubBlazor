@@ -1,0 +1,37 @@
+﻿@* @using System.Linq
+@rendermode InteractiveServer
+@page "/enumStuff"
+
+<MudSelect T="TestEnum" MultiSelectionTextFunc="EnumMultiSelectionTextFunc" MultiSelection @bind-SelectedValues="_selectedOptions" Label="Enum Values">
+    @foreach (var option in Enum.GetValues<TestEnum>())
+    {
+        <MudSelectItem Value="@option">@option.ToString()</MudSelectItem>
+    }
+</MudSelect>
+
+@code {
+    private IEnumerable<TestEnum> _selectedOptions { get; set; } = new List<TestEnum>() { TestEnum.Value2 };
+
+    // private enum TestEnum
+    // {
+    //     Value1,
+    //     Value2,
+    //     Value3
+    // }
+
+    // this will work
+    private enum TestEnum
+    {
+       Value1 = 1,
+       Value2 = 2,
+       Value3 = 3
+    }
+
+    private string EnumMultiSelectionTextFunc(List<string> selectedValues)
+    {
+        var text = string.Join(", ", selectedValues);
+        Console.WriteLine(text);
+        return text;
+    }
+
+} *@

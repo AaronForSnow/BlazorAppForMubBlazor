@@ -1,0 +1,20 @@
+﻿@* @page "/weather"
+@rendermode InteractiveServer
+<MudText Typo="Typo.h6">MudBlazor is @Text</MudText>
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ButtonOnClick">@ButtonText</MudButton>
+<MudSelect Value="ourValue" MultiSelection>test in option</MudSelect>
+
+@code {
+    public string Text { get; set; } = "First time no click";
+    public string ButtonText { get; set; } = "Click Me never";
+    public int ButtonClicked { get; set; }
+    enumOptions ourValue = new();
+    public enum enumOptions {first, second, third}
+
+    void ButtonOnClick()
+    {
+        ButtonClicked += 1;
+        Text = $"Awesome x {ButtonClicked}";
+        ButtonText = "Click Me Again";
+    }
+} *@
